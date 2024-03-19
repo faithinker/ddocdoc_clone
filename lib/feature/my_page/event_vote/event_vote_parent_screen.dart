@@ -1,5 +1,7 @@
+import 'package:ddocdoc_clone/utils/domain_url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class EventVoteParentScreen extends StatefulWidget {
   const EventVoteParentScreen({super.key});
@@ -58,7 +60,7 @@ class _EventVoteParentScreen extends State<EventVoteParentScreen>
                       height: 47,
                       child: OutlinedButton(
                         onPressed: () {
-                          // Add your onPressed logic here
+                          GoRouter.of(context).push('/app-event');
                         },
                         style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -189,7 +191,9 @@ class CustomNavigation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            GoRouter.of(context).pop();
+          },
           child: const Icon(
             Icons.arrow_back_ios_new,
           ),

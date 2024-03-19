@@ -23,13 +23,17 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
         path: '/service',
-        builder: (context, state) => WebViewScreen(url: DomainURL.service)),
+        builder: (context, state) =>
+            WebViewScreen(url: DomainURL.service, title: '이용약관')),
     GoRoute(
         path: '/event-vote',
         builder: (context, state) => const EventVoteParentScreen()),
     GoRoute(
         path: '/app-event',
-        builder: (context, state) => WebViewScreen(url: DomainURL.appEvent)),
+        builder: (context, state) => WebViewScreen(
+              url: DomainURL.appEventEnded,
+              title: '지난 이벤트',
+            )),
   ],
 );
 

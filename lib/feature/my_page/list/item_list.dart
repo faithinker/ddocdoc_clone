@@ -25,7 +25,13 @@ class ItemList extends StatelessWidget {
             (IconData, String) item = lists[index];
             return GestureDetector(
               onTap: () {
-                GoRouter.of(context).go('/event-vote');
+                if (index == 0) {
+                  GoRouter.of(context).push('/event-vote');
+                } else if (index == 1)
+                  GoRouter.of(context).push('/event-vote');
+                else if (index == 2)
+                  GoRouter.of(context).push('/event-vote');
+                else if (index == 3) GoRouter.of(context).push('/event-vote');
               },
               child: Row(
                 children: [

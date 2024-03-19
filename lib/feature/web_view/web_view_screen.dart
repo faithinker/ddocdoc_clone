@@ -1,11 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatelessWidget {
+  final String title;
   final String url;
 
-  WebViewScreen({super.key, required this.url});
+  WebViewScreen({super.key, required this.url, required this.title});
 
   late final WebViewController _controller = WebViewController()
     ..loadRequest(Uri.parse(url));
@@ -26,18 +27,16 @@ class WebViewScreen extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () {
-                      // FIXME: POP 제대로 안되고 있다.
-                      Navigator.of(context).pop();
-                      //GoRouter.of(context).pop();
+                      GoRouter.of(context).pop();
                     },
                   ),
                   const Spacer(),
-                  const Padding(
-                    padding: EdgeInsets.only(
+                  Padding(
+                    padding: const EdgeInsets.only(
                         right: 48), // IconButton 길이만큼 빼줌(가운데 위치시키기 위해)
                     child: Text(
-                      '이용약관',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      title,
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ),
                   const Spacer(),
