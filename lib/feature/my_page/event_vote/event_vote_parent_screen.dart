@@ -2,6 +2,8 @@ import 'package:ddocdoc_clone/utils/domain_url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../component/default_tab_bar.dart';
+import '../../../component/custom_navigation.dart';
 
 class EventVoteParentScreen extends StatefulWidget {
   const EventVoteParentScreen({super.key});
@@ -41,7 +43,7 @@ class _EventVoteParentScreen extends State<EventVoteParentScreen>
                 ),
               ),
               const SizedBox(height: 20),
-              EventVoteTabBar(
+              DefaultTabBar(
                 key: const ValueKey('communityTab'),
                 tabController: tabController,
                 tabList: _tabList,
@@ -90,42 +92,7 @@ class _EventVoteParentScreen extends State<EventVoteParentScreen>
   }
 }
 
-class EventVoteTabBar extends StatelessWidget {
-  final TabController tabController;
-  final List<String> tabList;
 
-  const EventVoteTabBar({
-    required Key key,
-    required this.tabController,
-    required this.tabList,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TabBar(
-      controller: tabController,
-      labelColor: Colors.black,
-      unselectedLabelColor: Colors.black,
-      labelStyle: const TextStyle(
-        fontSize: 16,
-      ),
-      unselectedLabelStyle: const TextStyle(
-        fontSize: 16,
-      ),
-      indicatorSize: TabBarIndicatorSize.tab,
-      indicatorColor: Colors.black,
-      overlayColor: const MaterialStatePropertyAll(
-        Colors.transparent,
-      ),
-      labelPadding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 5,
-      ),
-      onTap: (index) {},
-      tabs: tabList.map((e) => Tab(text: e)).toList(),
-    );
-  }
-}
 
 class EventVoteTile extends StatelessWidget {
   const EventVoteTile({super.key});
@@ -180,32 +147,3 @@ class EventVoteTile extends StatelessWidget {
   }
 }
 
-class CustomNavigation extends StatelessWidget {
-  final String title;
-
-  const CustomNavigation({required this.title, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        GestureDetector(
-          onTap: () {
-            GoRouter.of(context).pop();
-          },
-          child: const Icon(
-            Icons.arrow_back_ios_new,
-          ),
-        ),
-        const Spacer(),
-        Text(
-          title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-        ),
-        const SizedBox(width: 30),
-        const Spacer(),
-      ],
-    );
-  }
-}
