@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ItemList extends StatelessWidget {
   final List<(IconData, String)> lists = [
@@ -8,7 +9,7 @@ class ItemList extends StatelessWidget {
     (Icons.star, '찜한 병원'),
   ];
 
-  ItemList({Key? key}) : super(key: key);
+  ItemList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,35 +23,40 @@ class ItemList extends StatelessWidget {
           itemCount: lists.length,
           itemBuilder: (BuildContext context, int index) {
             (IconData, String) item = lists[index];
-            return Row(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      width: itemWidth,
-                      height: itemWidth,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
+            return GestureDetector(
+              onTap: () {
+                GoRouter.of(context).go('/event-vote');
+              },
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        width: itemWidth,
+                        height: itemWidth,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          item.$1,
+                          size: itemWidth / 2 - 10,
+                        ),
                       ),
-                      child: Icon(
-                        item.$1,
-                        size: itemWidth / 2 - 10,
+                      const SizedBox(height: 10),
+                      Text(
+                        textAlign: TextAlign.center,
+                        item.$2,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      textAlign: TextAlign.center,
-                      item.$2,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                if (index != lists.length) const SizedBox(width: 20),
-              ],
+                    ],
+                  ),
+                  if (index != lists.length) const SizedBox(width: 20),
+                ],
+              ),
             );
           }),
     );
