@@ -18,14 +18,7 @@ class CommunityScreen extends StatefulWidget {
 
 class _CommunityScreen extends State<CommunityScreen>
     with SingleTickerProviderStateMixin {
-  final _tabList = [
-    "전체",
-    "아이가 아파요",
-    "아토피맘 공감",
-    "성장발달 고민",
-    "육아•일상",
-    "이벤트"
-  ];
+  final _tabList = ["전체", "아이가 아파요", "아토피맘 공감", "성장발달 고민", "육아•일상", "이벤트"];
 
   late TabController tabController = TabController(
     length: _tabList.length,
@@ -123,57 +116,47 @@ class CommunityTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Container(
+            width: 35,
+            height: 20,
+            decoration: const BoxDecoration(
+              color: Colors.yellow,
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+              //border: Border.all(color: Colors.blue, width: 1.0),
+            ),
+            child: const Center(
+              child: Text(
+                '공지',
+                style: TextStyle(fontSize: 11.0),
+              ),
+            ),
+          ),
+          const SizedBox(height: 3),
           const Text(
-            '[세뱃돈 이벤트] 설 연휴에 뭐 하세요? 이번 설 연휴 어디서 무얼 하며 지내시는지 댓글',
+            '똑닥이 가져온 좋은 소식 3가지',
             textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            '접수할 때, 체크할 게 하나 줄었어요!> 고유식...',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              color: Colors.black.withOpacity(0.5),
+            ),
           ),
           const SizedBox(height: 10),
-          Row(
-            children: [
-              Text(
-                '똑닥팀 • N분/시간/일 전',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black.withOpacity(0.3),
-                ),
-              ),
-            ],
+          Text(
+            '2주 전•좋아요 31•댓글 28',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.black.withOpacity(0.3),
+            ),
           ),
-          const SizedBox(height: 15),
-          Row(
-            children: [
-              Icon(
-                Icons.favorite_outline_rounded,
-                size: 18,
-                color: Colors.black.withOpacity(0.3),
-              ),
-              const SizedBox(width: 5),
-              Text(
-                '좋아요 999',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black.withOpacity(0.3),
-                ),
-              ),
-              const SizedBox(width: 20),
-              Icon(
-                Icons.sms_outlined,
-                size: 18,
-                color: Colors.black.withOpacity(0.4),
-              ),
-              const SizedBox(width: 5),
-              Text(
-                '댓글 999',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black.withOpacity(0.4),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           Divider(
             thickness: 1.0,
             color: Colors.black.withOpacity(0.2),
