@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'banner.dart';
 import 'component/grey_container.dart';
 import 'component/search_bar_widget.dart';
@@ -152,7 +153,12 @@ class HomeScreen extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 15),
-                  const SearchBarWidget(),
+                  GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).push('/search');
+                    },
+                    child: const SearchBarWidget(),
+                  ),
                   const SizedBox(height: 20),
                 ],
               ),
