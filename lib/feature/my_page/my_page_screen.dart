@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flash/flash_helper.dart';
 import '../../feature/my_page/list/item_list.dart';
 import '../../feature/my_page/list/my_list.dart';
 
@@ -9,7 +10,6 @@ final scrollProvider =
 
 // TODO: 스크롤 할 때 Top Navigation에 마이페이지 로그인 hidden 처리 false => riverpod watch로 구현
 class MyPageScreen extends ConsumerWidget {
-
   MyPageScreen({super.key});
 
   final List<String> mySubTitles = [
@@ -23,7 +23,8 @@ class MyPageScreen extends ConsumerWidget {
     const Manage(text: '우리아이 키·몸무게', isNew: true),
     const Manage(text: '결제수단 관리'),
     const Manage(text: '진료내역'),
-    const Manage(text: '접수·예약 패널티'),
+    const Manage(text: '접수·예약 페널티'),
+    const Manage(text: '찜한 병원'),
   ];
 
   final List<Manage> documents = [
@@ -51,7 +52,7 @@ class MyPageScreen extends ConsumerWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      //
+                      context.showToast(Text('TODO: 알림 화면 이동'));
                     },
                     child: Icon(
                       Icons.notifications_outlined,
@@ -62,7 +63,7 @@ class MyPageScreen extends ConsumerWidget {
                   const SizedBox(width: 15),
                   GestureDetector(
                     onTap: () {
-                      //
+                      context.showToast(Text('TODO: 설정 화면 이동'));
                     },
                     child: Icon(
                       Icons.settings_outlined,

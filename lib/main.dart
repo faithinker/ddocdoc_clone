@@ -8,6 +8,10 @@ import '../../feature/bottom_tab/tap_screen.dart';
 import '../../feature/my_page/event_vote/event_vote_parent_screen.dart';
 import '../../utils/domain_url.dart';
 import '../feature/web_view/web_view_screen.dart';
+import '../feature/family_manage/family_manage_screen.dart';
+import '../feature/health_feed/health_feed_screen.dart';
+import '../feature/favorite_hospital/favorite_hospital_screen.dart';
+import '../feature/search/search_screen.dart';
 
 void main() {
   runApp(const ProviderScope(
@@ -34,6 +38,16 @@ final GoRouter _router = GoRouter(
               url: DomainURL.appEventEnded,
               title: '지난 이벤트',
             )),
+    GoRoute(
+        path: '/family-manage',
+        builder: (context, state) => const FamilyManageScreen()),
+    GoRoute(
+        path: '/health-feed',
+        builder: (context, state) => const HealthFeedScreen()),
+    GoRoute(
+        path: '/favorite-hospital',
+        builder: (context, state) => const FavoriteHospitalScreen()),
+    GoRoute(path: '/search', builder: (context, state) => const SearchScreen()),
   ],
 );
 

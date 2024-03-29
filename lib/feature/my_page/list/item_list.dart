@@ -6,7 +6,7 @@ class ItemList extends StatelessWidget {
     (Icons.present_to_all, '이벤트·투표'),
     (Icons.people, '가족관리'),
     (Icons.favorite, '건강피드'),
-    (Icons.star, '찜한 병원'),
+    (Icons.star, '고객센터'),
   ];
 
   ItemList({super.key});
@@ -28,9 +28,9 @@ class ItemList extends StatelessWidget {
                 if (index == 0) {
                   GoRouter.of(context).push('/event-vote');
                 } else if (index == 1)
-                  GoRouter.of(context).push('/event-vote');
+                  GoRouter.of(context).push('/family-manage');
                 else if (index == 2)
-                  GoRouter.of(context).push('/event-vote');
+                  GoRouter.of(context).push('/health-feed');
                 else if (index == 3) GoRouter.of(context).push('/event-vote');
               },
               child: Row(
