@@ -5,7 +5,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   final Color frontColor;
   final Color backgroundColor;
-  final Map<double, double>? dimensions;
+  final List<double>? dimensions;
   final EdgeInsetsGeometry? edge;
   final double? textSize;
   final double? corner;
@@ -47,6 +47,7 @@ class CustomButton extends StatelessWidget {
             color: backgroundColor,
             border: border),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
