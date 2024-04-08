@@ -9,13 +9,11 @@ class FavoriteHospitalScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      child: CustomButton(
-        text: '자녀추가',
-        backgroundColor: Colors.black.withOpacity(0.5),
-        onPressed: () {
-          context.showToast(Text('message (Queue)'));
-        },
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: Colors.white,
+        ),
       ),
     );
   }
