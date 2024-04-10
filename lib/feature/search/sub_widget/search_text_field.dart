@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../search_provider.dart';
 
-class SearchTextField extends StatelessWidget {
-  String? keyword;
-
-  SearchTextField({super.key, this.keyword});
+class SearchTextField extends ConsumerWidget {
+  const SearchTextField({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final searchState = ref.watch(searchStateProvider);
+
     return TextField(
       decoration: InputDecoration(
         filled: true,
@@ -23,7 +27,7 @@ class SearchTextField extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
       ),
       onChanged: (value) {
-        print('Search query: $value');
+        ref.read(searchStateProvider.notifier).updateSearchTerm(value);
       },
     );
   }
