@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyTtokDakScreen extends ConsumerWidget {
-  const MyTtokDakScreen({super.key});
+class MyDdocDocScreen extends ConsumerWidget {
+  const MyDdocDocScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

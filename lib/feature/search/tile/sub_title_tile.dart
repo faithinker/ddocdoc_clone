@@ -36,7 +36,7 @@ class SubTitleTile extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.w600, color: Colors.black)),
           ])),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
         ],
       ),
     );

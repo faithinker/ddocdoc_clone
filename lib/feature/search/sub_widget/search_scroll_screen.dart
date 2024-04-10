@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../tile/recommend_tile.dart';
 import '../tile/recent_tile.dart';
 import '../tile/sub_title_tile.dart';
+import '../tile/no_recent_tile.dart';
 import '../../../component/custom_button.dart';
 
 class SearchScrollScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class SearchScrollScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: sampleDataList.length + 4,
+      itemCount: sampleDataList.length + (sampleDataList.isEmpty ? 3 : 4),
       itemBuilder: (context, index) {
         if (index == 0) {
           return const SubTitleTile(subTitleType: SearchSubTitleType.recommend);
@@ -29,10 +30,11 @@ class SearchScrollScreen extends StatelessWidget {
           return RecommendTile(texts: recommendKeywords);
         } else if (index == 2) {
           return const SubTitleTile(subTitleType: SearchSubTitleType.recent);
+        } else if (index == 3 && sampleDataList.isEmpty) {
+          return const NoRecentTile();
         } else if (index == sampleDataList.length + 3) {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            // margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             alignment: Alignment.centerRight,
             child: CustomButton(
                 text: '전체삭제',
@@ -43,7 +45,6 @@ class SearchScrollScreen extends StatelessWidget {
                 onTap: () {}),
           );
         } else {
-// TODO: 최근 검색어 제목(타이틀), 리스트 없을 경우 : 최근 검색어가 없습니다. => ZStack Container 사용?
           return RecentTile(
               text: sampleDataList[index - 3][0],
               date: sampleDataList[index - 3][1]);

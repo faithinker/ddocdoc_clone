@@ -1,4 +1,4 @@
-import 'package:ddocdoc_clone/feature/my_ttokdak/my_ttokdak_screen.dart';
+import 'package:ddocdoc_clone/feature/my_ddocdoc/my_ddocdoc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,7 +15,7 @@ class TabScreen extends ConsumerWidget {
   final List<Widget> _pages = [
     const HomeScreen(),
     // const PlaceholderWidget(color: Colors.green, text: 'Tab 2'),
-    MyTtokDakScreen(),
+    const MyDdocDocScreen(),
     const ProviderScope(child: CommunityScreen()),
     MyPageScreen(), //PlaceholderWidget(color: Colors.yellow, text: 'Tab 4'),
   ];
