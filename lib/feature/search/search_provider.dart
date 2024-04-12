@@ -40,9 +40,10 @@ class SearchNotifier extends StateNotifier<List<SearchItem>> {
     final existingIndex = state.indexWhere((item) => item.keyword == keyword);
 
     if (existingIndex != -1) {
-      state[existingIndex].date = currentDate;
+      state.removeAt(existingIndex);
+      state.insert(0, newSearchItem);
     } else {
-      state.add(newSearchItem);
+      state.insert(0, newSearchItem);
     }
 
     final prefs = await SharedPreferences.getInstance();
@@ -52,5 +53,15 @@ class SearchNotifier extends StateNotifier<List<SearchItem>> {
     );
 
     state = List.from(state);
+  }
+
+  void removeSearch(int order) async {
+    print('Remove Order: $order');
+    state.removeAt(order);
+    state = state;
+  }
+
+  void removeAll() async {
+    state = [];
   }
 }
