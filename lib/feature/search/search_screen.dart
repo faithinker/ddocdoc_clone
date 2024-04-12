@@ -6,7 +6,6 @@ import '../../component/custom_button.dart';
 import 'sub_widget/search_text_field.dart';
 import 'sub_widget/search_scroll_screen.dart';
 import 'package:go_router/go_router.dart';
-
 class SearchScreen extends ConsumerWidget {
   const SearchScreen({super.key});
 

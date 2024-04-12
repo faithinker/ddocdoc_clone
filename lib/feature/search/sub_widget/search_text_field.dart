@@ -9,8 +9,6 @@ class SearchTextField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchState = ref.watch(searchStateProvider);
-
     return TextField(
       decoration: InputDecoration(
         filled: true,
@@ -26,8 +24,8 @@ class SearchTextField extends ConsumerWidget {
         ),
         contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
       ),
-      onChanged: (value) {
-        ref.read(searchStateProvider.notifier).updateSearchTerm(value);
+      onSubmitted: (value) {
+        ref.read(searchStateProvider.notifier).saveSearch(value);
       },
     );
   }

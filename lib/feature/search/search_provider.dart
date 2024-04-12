@@ -1,69 +1,56 @@
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final searchStateProvider =
-    StateNotifierProvider<SearchNotifier, AsyncValue<SearchState>>((ref) {
-  return SearchNotifier(ref);
+    StateNotifierProvider<SearchNotifier, List<SearchItem>>((ref) {
+  return SearchNotifier();
 });
 
-class SearchState {
-  final String searchTerm;
-  final String searchDate;
+class SearchItem {
+  String keyword;
+  String date;
 
-  SearchState(this.searchTerm, this.searchDate);
+  SearchItem({required this.keyword, required this.date});
+
+  @override
+  String toString() => '$keyword,$date';
+
+  factory SearchItem.fromString(String str) {
+    final parts = str.split(',');
+    return SearchItem(keyword: parts[0], date: parts[1]);
+  }
 }
 
-class SearchNotifier extends StateNotifier<AsyncValue<SearchState>> {
-  final Ref _ref;
-
-  SearchNotifier(this._ref) : super(const AsyncValue.loading()) {
+class SearchNotifier extends StateNotifier<List<SearchItem>> {
+  SearchNotifier() : super([]) {
     _loadSearch();
   }
 
   Future<void> _loadSearch() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String searchTerm = prefs.getString('search_term') ?? '';
-      String searchDate = prefs.getString('search_date') ?? '';
-
-      state = AsyncValue.data(SearchState(searchTerm, searchDate));
-    } catch (error, stackTrace) {
-      state = AsyncValue.error(error, stackTrace);
-    }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final searchData = prefs.getStringList('searchData') ?? [];
+    state = searchData.map((e) => SearchItem.fromString(e)).toList();
   }
 
-  Future<void> _saveSearch(String term, String date) async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('search_term', term);
-      await prefs.setString('search_date', date);
+  void saveSearch(String keyword) async {
+    final currentDate = DateFormat('MM.dd').format(DateTime.now());
+    final newSearchItem = SearchItem(keyword: keyword, date: currentDate);
+    final existingIndex = state.indexWhere((item) => item.keyword == keyword);
 
-      state = AsyncValue.data(SearchState(term, date));
-    } catch (error, stackTrace) {
-      state = AsyncValue.error(error, stackTrace);
+    if (existingIndex != -1) {
+      state[existingIndex].date = currentDate;
+    } else {
+      state.add(newSearchItem);
     }
-  }
 
-  void updateSearchTerm(String term) async {
-    final currentState = state.value;
-    if (currentState != null) {
-      state = AsyncValue.data(SearchState(term, currentState.searchDate));
-    }
-  }
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(
+      'searchData',
+      state.map((e) => e.toString()).toList(),
+    );
 
-  void onSearch() async {
-    final currentState = state.value;
-    if (currentState != null) {
-      String searchTerm = currentState.searchTerm.trim();
-      DateTime now = DateTime.now();
-      String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-
-      if (searchTerm.isNotEmpty) {
-        await _saveSearch(searchTerm, formattedDate);
-      }
-    }
+    state = List.from(state);
   }
 }

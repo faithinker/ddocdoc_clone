@@ -4,25 +4,21 @@ import '../tile/recent_tile.dart';
 import '../tile/sub_title_tile.dart';
 import '../tile/no_recent_tile.dart';
 import '../../../component/custom_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../search_provider.dart';
 
-class SearchScrollScreen extends StatelessWidget {
+class SearchScrollScreen extends ConsumerWidget {
   SearchScrollScreen({super.key});
 
-  List<List<String>> sampleDataList = [
-    ['의원1', '04.05'],
-    ['의원2', '04.06'],
-    ['의원3', '04.07'],
-    ['의원4', '04.08'],
-    ['의원5', '04.09'],
-  ];
-
+  List<Map<String, dynamic>> dataList = [];
   List<String> recommendKeywords = ['영유아검진', '똑닥예약병원', '야간진료', '독감예방접종', '여의사'];
 
   // MARK: 기본적으로 3개, 검색어 있을 경우 4개 추가
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final searchState = ref.watch(searchStateProvider);
     return ListView.builder(
-      itemCount: sampleDataList.length + (sampleDataList.isEmpty ? 3 : 4),
+      itemCount: searchState.length + (searchState.isEmpty ? 3 : 4),
       itemBuilder: (context, index) {
         if (index == 0) {
           return const SubTitleTile(subTitleType: SearchSubTitleType.recommend);
@@ -30,9 +26,9 @@ class SearchScrollScreen extends StatelessWidget {
           return RecommendTile(texts: recommendKeywords);
         } else if (index == 2) {
           return const SubTitleTile(subTitleType: SearchSubTitleType.recent);
-        } else if (index == 3 && sampleDataList.isEmpty) {
+        } else if (index == 3 && searchState.isEmpty) {
           return const NoRecentTile();
-        } else if (index == sampleDataList.length + 3) {
+        } else if (index == searchState.length + 3) {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             alignment: Alignment.centerRight,
@@ -46,8 +42,8 @@ class SearchScrollScreen extends StatelessWidget {
           );
         } else {
           return RecentTile(
-              text: sampleDataList[index - 3][0],
-              date: sampleDataList[index - 3][1]);
+              text: searchState[index - 3].keyword,
+              date: searchState[index - 3].date);
         }
       },
     );
