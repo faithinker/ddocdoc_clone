@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'tile/permission_tile.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PermissionScreen extends ConsumerWidget {
   PermissionScreen({super.key});
@@ -26,6 +27,33 @@ class PermissionScreen extends ConsumerWidget {
         title: '저장',
         subtitle: '서비스 이용을 위해 필요한 사진 및 파일 저장')
   ];
+
+  Future<void> requestPermissions() async {
+    // 권한들을 한 번에 요청
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.location,
+      Permission.camera,
+      Permission.microphone,
+      Permission.photos,
+      Permission.notification,
+      Permission.appTrackingTransparency,
+    ].request();
+
+    // 각 권한에 대한 상태 확인 및 처리
+    statuses.forEach((permission, status) {
+      if (status.isGranted) {
+        // 권한이 허용된 경우
+        print('${permission.toString().split('.')[1]} permission granted');
+      } else if (status.isDenied) {
+        // 사용자가 권한을 거부한 경우
+        print('${permission.toString().split('.')[1]} permission denied');
+      } else if (status.isPermanentlyDenied) {
+        // 사용자가 권한을 영구적으로 거부한 경우
+        print(
+            '${permission.toString().split('.')[1]} permission permanently denied');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -92,6 +120,9 @@ class PermissionScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              onTap: () async {
+                await requestPermissions();
+              },
             ),
           ],
         ),

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -24,6 +26,31 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라 권한</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>현 위치에서 가까운 순으로 병원, 약국을 보여드립니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>현 위치에서 가까운 순으로 병원, 약국을 보여드립니다.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>마이크 권한</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>사진 권한</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진 권한</string>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>경고, 사운드 및 아이콘 배지가 알림에 포함될 수 있습니다. 설정에서 이를 구성할 수 있습니다.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>고객님을 위한 맞춤형 병원 추천 및 서비스 제공을 위해 기기의 광고식별자를 수집합니다.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,9 +68,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>
