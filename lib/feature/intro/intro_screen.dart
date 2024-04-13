@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,11 +19,18 @@ class IntroScreen extends ConsumerWidget {
       });
     }
 
-    return Container(
-        child: const Center(
-      child: Column(
-        children: [Text('똑닥 로고')],
+    return const Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('똑닥',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
       ),
-    ));
+    );
   }
 }
