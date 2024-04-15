@@ -15,7 +15,6 @@ import 'feature/search/search_screen.dart';
 import 'feature/intro/intro_screen.dart';
 import 'feature/permission/permission_screen.dart';
 
-
 void main() {
   runApp(const ProviderScope(
     child: DdocdocApp(),
@@ -26,7 +25,7 @@ final GoRouter _router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => IntroScreen(),
+      builder: (context, state) => const IntroScreen(),
     ),
     GoRoute(
       path: '/bottom-tab',

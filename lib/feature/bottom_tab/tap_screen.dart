@@ -13,7 +13,7 @@ final tabIndexProvider = StateProvider((ref) => 0);
 // class _TabScreenState extends State<TabScreen> {
 class TabScreen extends ConsumerWidget {
   final List<Widget> _pages = [
-    const HomeScreen(),
+    HomeScreen(),
     // const PlaceholderWidget(color: Colors.green, text: 'Tab 2'),
     const MyDdocDocScreen(),
     const ProviderScope(child: CommunityScreen()),

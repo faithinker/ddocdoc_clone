@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'tile/permission_tile.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+// TODO: 최초 1회만 이 페이지 타도록 Preference 여부 저장
+
 class PermissionScreen extends ConsumerWidget {
   PermissionScreen({super.key});
 
@@ -122,6 +124,7 @@ class PermissionScreen extends ConsumerWidget {
               ),
               onTap: () async {
                 await requestPermissions();
+                GoRouter.of(context).push('/bottom-tab');
               },
             ),
           ],
