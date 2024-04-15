@@ -13,6 +13,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geolocator_apple/geolocator_apple.dart';
 import '../../component/login_modal_bottom_sheet.dart';
 
+/*
+ Client ID : qyfcvnrnq8
+ Client Secret : 195ciZHEgf8gtguBzuu4nJ1GTIurCxUaRxqYCGJ0
+
+*/
+
 final locationFutureProvider = FutureProvider<String>((ref) async {
   GeolocatorApple.registerWith();
   try {
@@ -20,6 +26,9 @@ final locationFutureProvider = FutureProvider<String>((ref) async {
       desiredAccuracy: LocationAccuracy.high,
     );
     print('jhkim: $position');
+
+
+
     return '성공';
   } catch (e) {
     // 기본 위치 설정

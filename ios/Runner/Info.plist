@@ -35,9 +35,6 @@
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 	</dict>
-	<key>NMFClientId</key>
-  	<string>qyfcvnrnq8</string>
-  	<key>io.flutter.embedded_views_preview</key>
 	<key>NSCameraUsageDescription</key>
 	<string>카메라 권한</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
