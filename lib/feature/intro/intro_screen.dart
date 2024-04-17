@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../utils/preference_item_provider.dart';
+import '../../utils/router_key.dart';
 
 final isOnceProvider = StateProvider<bool>((ref) => true);
 
@@ -11,10 +13,13 @@ class IntroScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isOnce = ref.watch(isOnceProvider);
+    final prefsProvider = ref.read(preferenceItemProvider.notifier);
 
     if (isOnce) {
       Future.delayed(const Duration(seconds: 3), () {
-        GoRouter.of(context).push('/permission');
+        final isSkip = prefsProvider.getPreferenceValue(PrefernceKey.permisson);
+        GoRouter.of(context)
+            .push(isSkip ? RouterKey.bottomTab : RouterKey.permission);
         ref.read(isOnceProvider.notifier).state = false;
       });
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../utils/router_key.dart';
 
 class ItemList extends StatelessWidget {
   final List<(IconData, String)> lists = [
@@ -26,12 +27,13 @@ class ItemList extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 if (index == 0) {
-                  GoRouter.of(context).push('/event-vote');
+                  GoRouter.of(context).push(RouterKey.eventVote);
                 } else if (index == 1)
-                  GoRouter.of(context).push('/family-manage');
+                  GoRouter.of(context).push(RouterKey.familyManage);
                 else if (index == 2)
-                  GoRouter.of(context).push('/health-feed');
-                else if (index == 3) GoRouter.of(context).push('/event-vote');
+                  GoRouter.of(context).push(RouterKey.healthFeed);
+                else if (index == 3)
+                  GoRouter.of(context).push(RouterKey.eventVote);
               },
               child: Row(
                 children: [

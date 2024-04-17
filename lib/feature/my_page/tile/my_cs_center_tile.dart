@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:go_router/go_router.dart';
+import '../../../utils/router_key.dart';
+
 
 class MyCSCenterTile extends StatelessWidget {
   final List<List<String>> items;
@@ -19,7 +21,7 @@ class MyCSCenterTile extends StatelessWidget {
             items[0].length,
             (colIndex) => GestureDetector(
               onTap: () {
-                context.go('/service');
+                context.go(RouterKey.service);
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 2 - 30,

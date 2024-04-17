@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'tile/permission_tile.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-// TODO: 최초 1회만 이 페이지 타도록 Preference 여부 저장
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../utils/preference_item_provider.dart';
+import '../../utils/router_key.dart';
 
 class PermissionScreen extends ConsumerWidget {
   PermissionScreen({super.key});
@@ -44,13 +45,10 @@ class PermissionScreen extends ConsumerWidget {
     // 각 권한에 대한 상태 확인 및 처리
     statuses.forEach((permission, status) {
       if (status.isGranted) {
-        // 권한이 허용된 경우
         print('${permission.toString().split('.')[1]} permission granted');
       } else if (status.isDenied) {
-        // 사용자가 권한을 거부한 경우
         print('${permission.toString().split('.')[1]} permission denied');
       } else if (status.isPermanentlyDenied) {
-        // 사용자가 권한을 영구적으로 거부한 경우
         print(
             '${permission.toString().split('.')[1]} permission permanently denied');
       }
@@ -123,8 +121,11 @@ class PermissionScreen extends ConsumerWidget {
                 ),
               ),
               onTap: () async {
+                ref
+                    .read(preferenceItemProvider.notifier)
+                    .setPreferenceItem(PrefernceKey.permisson, true);
                 await requestPermissions();
-                GoRouter.of(context).push('/bottom-tab');
+                GoRouter.of(context).push(RouterKey.bottomTab);
               },
             ),
           ],

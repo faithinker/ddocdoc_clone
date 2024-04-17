@@ -14,6 +14,7 @@ import 'feature/favorite_hospital/favorite_hospital_screen.dart';
 import 'feature/search/search_screen.dart';
 import 'feature/intro/intro_screen.dart';
 import 'feature/permission/permission_screen.dart';
+import 'utils/router_key.dart';
 
 void main() {
   runApp(const ProviderScope(
@@ -24,40 +25,40 @@ void main() {
 final GoRouter _router = GoRouter(
   routes: [
     GoRoute(
-      path: '/',
+      path: RouterKey.initial,
       builder: (context, state) => const IntroScreen(),
     ),
     GoRoute(
-      path: '/bottom-tab',
+      path: RouterKey.bottomTab,
       builder: (context, state) => TabScreen(),
     ),
     GoRoute(
-      path: '/permission',
+      path: RouterKey.permission,
       builder: (context, state) => PermissionScreen(),
     ),
     GoRoute(
-        path: '/service',
+        path: RouterKey.service,
         builder: (context, state) =>
             WebViewScreen(url: DomainURL.service, title: '이용약관')),
     GoRoute(
-        path: '/event-vote',
+        path: RouterKey.eventVote,
         builder: (context, state) => const EventVoteParentScreen()),
     GoRoute(
-        path: '/app-event',
+        path: RouterKey.eventVote,
         builder: (context, state) => WebViewScreen(
               url: DomainURL.appEventEnded,
               title: '지난 이벤트',
             )),
     GoRoute(
-        path: '/family-manage',
+        path: RouterKey.appEvent,
         builder: (context, state) => const FamilyManageScreen()),
     GoRoute(
-        path: '/health-feed',
+        path: RouterKey.healthFeed,
         builder: (context, state) => const HealthFeedScreen()),
     GoRoute(
-        path: '/favorite-hospital',
+        path: RouterKey.favoriteHospital,
         builder: (context, state) => const FavoriteHospitalScreen()),
-    GoRoute(path: '/search', builder: (context, state) => const SearchScreen()),
+    GoRoute(path: RouterKey.search, builder: (context, state) => const SearchScreen()),
   ],
 );
 
