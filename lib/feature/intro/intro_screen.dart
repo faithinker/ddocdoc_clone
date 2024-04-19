@@ -16,8 +16,9 @@ class IntroScreen extends ConsumerWidget {
     final prefsProvider = ref.read(preferenceItemProvider.notifier);
 
     if (isOnce) {
-      Future.delayed(const Duration(seconds: 3), () {
-        final isSkip = prefsProvider.getPreferenceValue(PrefernceKey.permisson);
+      Future.delayed(const Duration(seconds: 1), () { //TODO:  3으로 수정
+        final isSkip =
+            prefsProvider.getBoolPreferenceValue(PrefernceKey.permisson);
         GoRouter.of(context)
             .push(isSkip ? RouterKey.bottomTab : RouterKey.permission);
         ref.read(isOnceProvider.notifier).state = false;

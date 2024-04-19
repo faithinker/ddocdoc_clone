@@ -11,5 +11,6 @@ class RouterKey {
   static const healthFeed = '/health-feed';
   static const favoriteHospital = '/favorite-hospital';
   static const search = '/search';
+  static const pharmacyMap = '/pharmacy-map';
+  static const hospitalMap = '/hosptial-map';
 }
-

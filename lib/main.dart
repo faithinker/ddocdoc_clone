@@ -14,9 +14,14 @@ import 'feature/favorite_hospital/favorite_hospital_screen.dart';
 import 'feature/search/search_screen.dart';
 import 'feature/intro/intro_screen.dart';
 import 'feature/permission/permission_screen.dart';
+import 'feature/pharmacy_map/pharmacy_map_screen.dart';
+import 'feature/hospital_map/hospital_map_screen.dart';
 import 'utils/router_key.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NaverMapSdk.instance.initialize(clientId: 'qyfcvnrnq8');
   runApp(const ProviderScope(
     child: DdocdocApp(),
   ));
@@ -58,7 +63,15 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: RouterKey.favoriteHospital,
         builder: (context, state) => const FavoriteHospitalScreen()),
-    GoRoute(path: RouterKey.search, builder: (context, state) => const SearchScreen()),
+    GoRoute(
+        path: RouterKey.search,
+        builder: (context, state) => const SearchScreen()),
+    GoRoute(
+        path: RouterKey.pharmacyMap,
+        builder: (context, state) => const PharmacyMapScreen()),
+    GoRoute(
+        path: RouterKey.hospitalMap,
+        builder: (context, state) => const HospitalMapScreen()),
   ],
 );
 

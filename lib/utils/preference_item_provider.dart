@@ -5,22 +5,46 @@ import 'dart:convert';
 class PrefernceKey {
   static const permisson = 'permisson';
   static const adpopup = 'adpopup';
+  static const dongLocation = 'dongLocation';
+  static const position = 'position';
+}
+
+enum PrefernceKeys {
+  permisson,
+  adpopup;
+
+  Map<String, dynamic> toJson() => {
+        'permisson': '',
+        'adpopup': '',
+      };
 }
 
 final preferenceItemProvider =
-    StateNotifierProvider<PreferenceItemNotifer, Map<String, bool>>((ref) {
+    StateNotifierProvider<PreferenceItemNotifer, Map<String, dynamic>>((ref) {
   return PreferenceItemNotifer()..loadFromSharedPreferences();
 });
 
-class PreferenceItemNotifer extends StateNotifier<Map<String, bool>> {
+class PreferenceItemNotifer extends StateNotifier<Map<String, dynamic>> {
   PreferenceItemNotifer() : super({});
 
-  bool getPreferenceValue(String key) {
+  bool getBoolPreferenceValue(String key) {
     return state[key] ?? false;
   }
 
-  void setPreferenceItem(String key, bool isSkip) {
-    state = {...state, key: isSkip};
+  int getIntPreferenceValue(String key) {
+    return state[key] ?? 0;
+  }
+
+  double getDoublePreferenceValue(String key) {
+    return state[key] ?? 0;
+  }
+
+  String getStringPreferenceValue(String key) {
+    return state[key] ?? '';
+  }
+
+  void setPreferenceItem(String key, dynamic value) {
+    state = {...state, key: value};
     saveToSharedPreferences();
   }
 
@@ -34,7 +58,7 @@ class PreferenceItemNotifer extends StateNotifier<Map<String, bool>> {
     String? itemValue = prefs.getString('preferences');
     if (itemValue != null) {
       Map<String, dynamic> json = jsonDecode(itemValue);
-      state = json.map((key, value) => MapEntry(key, value as bool));
+      state = json.map((key, value) => MapEntry(key, value));
     }
   }
 

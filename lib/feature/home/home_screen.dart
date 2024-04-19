@@ -16,10 +16,10 @@ import 'package:geolocator_apple/geolocator_apple.dart';
 import '../../component/login_modal_bottom_sheet.dart';
 import '../../model/navermap_model.dart';
 import 'package:dio/dio.dart';
-
 import 'widget/child_physical_information_widget.dart';
 import 'widget/pharmacy_widget.dart';
 import 'widget/top_widget.dart';
+import '../../utils/preference_item_provider.dart';
 
 final locationFutureProvider = FutureProvider<String>((ref) async {
   GeolocatorApple.registerWith();
@@ -48,6 +48,13 @@ final naverMapProvider = Provider<NaverMapNetworkService>((ref) {
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
+  Future<void> setPrefsData(WidgetRef ref, String value, bool isLocation) async {
+    print('value: $value $isLocation');
+    ref
+        .read(preferenceItemProvider.notifier)
+        .setPreferenceItem(isLocation ? PrefernceKey.position : PrefernceKey.dongLocation, value);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double imageWidth = MediaQuery.of(context).size.width - 40;
@@ -55,9 +62,15 @@ class HomeScreen extends ConsumerWidget {
 
     return locationAsyncValue.when(
       data: (location) {
+        setPrefsData(ref, location, true);
+
         final naverMapAsyncValue = ref.watch(naverMapDataProvider(location));
         return naverMapAsyncValue.when(
           data: (naverMapData) {
+            final dongLocation = naverMapData.results[0].region.area3.name;
+            
+            setPrefsData(ref, dongLocation, false);
+
             return SingleChildScrollView(
               child: SafeArea(
                 child: Column(

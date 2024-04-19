@@ -6,11 +6,14 @@ import '../../component/custom_button.dart';
 import 'sub_widget/search_text_field.dart';
 import 'sub_widget/search_scroll_screen.dart';
 import 'package:go_router/go_router.dart';
+import '../../utils/preference_item_provider.dart';
+
 class SearchScreen extends ConsumerWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final dongLocation = ref.watch(preferenceItemProvider.notifier).getStringPreferenceValue(PrefernceKey.dongLocation);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -45,7 +48,7 @@ class SearchScreen extends ConsumerWidget {
                         Row(
                           children: [
                             CustomButton(
-                                text: '가산동',
+                                text: dongLocation,
                                 icon: Icons.my_location_outlined,
                                 backgroundColor: Colors.black.withOpacity(0.05),
                                 frontColor: Colors.black.withOpacity(0.6),
