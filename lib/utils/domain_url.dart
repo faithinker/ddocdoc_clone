@@ -3,8 +3,11 @@ class DomainURL {
 
   static const String service = 'https://ddocdoc.com/terms/service';
 
-  static const String eventVot =
+  static const String appEvent =
       'https://event-vote.webview.ddocdoc.com/app-event';
+
+  static const String appVote =
+      'https://event-vote.webview.ddocdoc.com/app-vote';
 
   static const String appEventEnded =
       'https://event-vote.webview.ddocdoc.com/app-event/ended';

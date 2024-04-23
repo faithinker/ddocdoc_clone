@@ -45,9 +45,18 @@ final GoRouter _router = GoRouter(
         path: RouterKey.service,
         builder: (context, state) =>
             WebViewScreen(url: DomainURL.service, title: '이용약관')),
+    // GoRoute(
+    //     path: RouterKey.eventVote,
+    //     builder: (context, state) => const EventVoteParentScreen()),
     GoRoute(
-        path: RouterKey.eventVote,
-        builder: (context, state) => const EventVoteParentScreen()),
+        path: '/webview/:url',
+        builder: (context, state) {
+          final url = state.pathParameters['url']!;
+          return WebViewScreen(
+            url: url,
+            title: '',
+          );
+        }),
     GoRoute(
         path: RouterKey.eventVote,
         builder: (context, state) => WebViewScreen(

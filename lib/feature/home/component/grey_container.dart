@@ -5,6 +5,7 @@ class GreyContainer extends StatelessWidget {
   final double height;
   final Widget child;
   final double containerHorizontal;
+  final void Function()? onTap;
 
   const GreyContainer({
     Key? key,
@@ -12,20 +13,24 @@ class GreyContainer extends StatelessWidget {
     this.height = 80,
     required this.child,
     this.containerHorizontal = 10,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: imageWidth,
-        height: height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.black.withOpacity(0.1)),
-        ),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: containerHorizontal),
-          child: child,
-        ));
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+          width: imageWidth,
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.black.withOpacity(0.1)),
+          ),
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: containerHorizontal),
+            child: child,
+          )),
+    );
   }
 }

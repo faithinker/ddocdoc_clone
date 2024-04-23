@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:go_router/go_router.dart';
-import '../../component/custom_button.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import '../../component/custom_button.dart';
 import '../../utils/preference_item_provider.dart';
 
 class PharmacyMapScreen extends ConsumerWidget {
@@ -60,7 +58,7 @@ class PharmacyMapScreen extends ConsumerWidget {
                   //locationButtonEnable: true,
                 ),
                 onMapReady: (mapController) async {
-                  final locationOverlay = await mapController.getLocationOverlay();
+                  await mapController.getLocationOverlay();
                 },
               ),
             ),

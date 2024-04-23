@@ -20,6 +20,8 @@ import 'widget/child_physical_information_widget.dart';
 import 'widget/pharmacy_widget.dart';
 import 'widget/top_widget.dart';
 import '../../utils/preference_item_provider.dart';
+import '../../utils/router_key.dart';
+import '../../utils/domain_url.dart';
 
 final locationFutureProvider = FutureProvider<String>((ref) async {
   GeolocatorApple.registerWith();
@@ -48,11 +50,12 @@ final naverMapProvider = Provider<NaverMapNetworkService>((ref) {
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  Future<void> setPrefsData(WidgetRef ref, String value, bool isLocation) async {
+  // FIXME : 에러 수정
+  Future<void> setPrefsData(
+      WidgetRef ref, String value, bool isLocation) async {
     print('value: $value $isLocation');
-    ref
-        .read(preferenceItemProvider.notifier)
-        .setPreferenceItem(isLocation ? PrefernceKey.position : PrefernceKey.dongLocation, value);
+    ref.read(preferenceItemProvider.notifier).setPreferenceItem(
+        isLocation ? PrefernceKey.position : PrefernceKey.dongLocation, value);
   }
 
   @override
@@ -68,7 +71,7 @@ class HomeScreen extends ConsumerWidget {
         return naverMapAsyncValue.when(
           data: (naverMapData) {
             final dongLocation = naverMapData.results[0].region.area3.name;
-            
+
             setPrefsData(ref, dongLocation, false);
 
             return SingleChildScrollView(
@@ -84,6 +87,10 @@ class HomeScreen extends ConsumerWidget {
                     const BannerWidget(),
                     const SizedBox(height: 20),
                     GreyContainer(
+                      onTap: () {
+                        GoRouter.of(context)
+                            .push(RouterKey.webUrl(DomainURL.appVote));
+                      },
                       imageWidth: imageWidth,
                       containerHorizontal: 20,
                       child: const Row(
