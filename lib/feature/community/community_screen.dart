@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../component/bottom_button.dart';
 import '../../component/t_header.dart';
 import '../../feature/community/community_tile.dart';
+import '../../utils/router_key.dart';
 import 'community_tab_bar.dart';
 
 /*
@@ -51,9 +53,14 @@ class _CommunityScreen extends State<CommunityScreen>
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: CommunityTile(),
             ),
-            const Padding(
-              padding: EdgeInsetsDirectional.only(end: 20),
-              child: BottomButton(),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(end: 20),
+              child: BottomButton(
+                onTap: () {
+                  GoRouter.of(context).push(RouterKey.write);
+                  
+                },
+              ),
             ),
           ],
         ),

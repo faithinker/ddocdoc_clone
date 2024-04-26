@@ -7,8 +7,6 @@ PODS:
     - NMapsMap (= 3.17.0)
   - geolocator_apple (1.2.0):
     - Flutter
-  - location (0.0.1):
-    - Flutter
   - NMapsGeometry (1.0.1)
   - NMapsMap (3.17.0):
     - NMapsGeometry
@@ -28,7 +26,6 @@ DEPENDENCIES:
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
-  - location (from `.symlinks/plugins/location/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
@@ -48,8 +45,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_naver_map/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
-  location:
-    :path: ".symlinks/plugins/location/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
@@ -64,7 +59,6 @@ SPEC CHECKSUMS:
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_naver_map: b18663bc83c2caaab484c58dccf239a87ebbed1b
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
-  location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: a5b909a31b6f3d27a670f6eb2ddc913c38975474
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c

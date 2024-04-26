@@ -4,7 +4,7 @@ class CustomButton extends StatelessWidget {
   final IconData? icon;
   final String text;
   final Color frontColor;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final List<double>? dimensions;
   final EdgeInsetsGeometry? edge;
   final double? textSize;
@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
     this.icon,
     required this.text,
     this.frontColor = Colors.black,
-    required this.backgroundColor,
+    this.backgroundColor,
     this.dimensions,
     this.edge,
     this.textSize,

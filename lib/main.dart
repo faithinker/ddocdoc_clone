@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import '../../utils/domain_url.dart';
+import 'utils/domain_url.dart';
+import 'utils/router_key.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'feature/bottom_tab/tap_screen.dart';
 import 'feature/my_page/event_vote/event_vote_parent_screen.dart';
 import 'feature/web_view/web_view_screen.dart';
@@ -16,8 +16,7 @@ import 'feature/intro/intro_screen.dart';
 import 'feature/permission/permission_screen.dart';
 import 'feature/pharmacy_map/pharmacy_map_screen.dart';
 import 'feature/hospital_map/hospital_map_screen.dart';
-import 'utils/router_key.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'feature/write/write_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,6 +80,11 @@ final GoRouter _router = GoRouter(
     GoRoute(
         path: RouterKey.hospitalMap,
         builder: (context, state) => const HospitalMapScreen()),
+    GoRoute(
+        path: RouterKey.write,
+        builder: (context, state) => const WriteScreen(),
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: WriteScreen())),
   ],
 );
 

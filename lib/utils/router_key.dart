@@ -14,5 +14,5 @@ class RouterKey {
   static const pharmacyMap = '/pharmacy-map';
   static const hospitalMap = '/hosptial-map';
   static String webUrl(String url) => '/webview/${Uri.encodeComponent(url)}';
-
+  static const write = '/write';
 }

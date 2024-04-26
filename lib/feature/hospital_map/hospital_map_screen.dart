@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flash/flash.dart';
-import 'package:flash/flash_helper.dart';
+import 'package:go_router/go_router.dart';
 import '../../component/custom_button.dart';
 
 class HospitalMapScreen extends ConsumerWidget {
