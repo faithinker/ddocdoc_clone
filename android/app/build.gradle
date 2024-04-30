@@ -41,7 +41,7 @@ android {
     println printFlutterMinSdkVersion
 
     namespace "com.joohyupkim.ddocdoc.ddocdoc_clone"
-    compileSdk fluttercompileSdkVersion.toInteger() // flutter.compileSdkVersion
+    compileSdk 34 // fluttercompileSdkVersion.toInteger() // flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -62,7 +62,7 @@ android {
         applicationId "com.joohyupkim.ddocdoc.ddocdoc_clone"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutterMinSdkVersion.toInteger() //flutter.minSdkVersion
+        minSdkVersion 23 //flutterMinSdkVersion.toInteger() //flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
