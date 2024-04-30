@@ -51,19 +51,51 @@ class PharmacyMapScreen extends ConsumerWidget {
               height: 1,
             ),
             Expanded(
-              child: NaverMap(
-                options: NaverMapViewOptions(
-                  initialCameraPosition: NCameraPosition(
-                      target: NLatLng(position[1], position[0]), zoom: 17),
-                  //locationButtonEnable: true,
-                ),
-                onMapReady: (mapController) async {
-                  await mapController.getLocationOverlay();
-                },
+              child: Stack(
+                children: [
+                  NaverMap(
+                    options: NaverMapViewOptions(
+                      initialCameraPosition: NCameraPosition(
+                          target: NLatLng(position[1], position[0]), zoom: 17),
+                      //locationButtonEnable: true,
+                    ),
+                    onMapReady: (mapController) async {
+                      mapController.getLocationOverlay();
+                    },
+                  ),
+                  CustomPillButton(),
+                ],
               ),
             ),
           ],
         )),
+      ),
+    );
+  }
+}
+
+class CustomPillButton extends StatelessWidget {
+  const CustomPillButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        ),
+        child: const Row(
+          mainAxisSize: MainAxisSize.min, // Row 사이즈를 내용물에 맞게 조절
+          children: [
+            Icon(Icons.calendar_today),
+            SizedBox(width: 5), // 아이콘과 텍스트 사이의 간격
+            Text('연중무휴'),
+          ],
+        ),
       ),
     );
   }

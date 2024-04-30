@@ -32,14 +32,7 @@ if (fluttercompileSdkVersion == null) {
     fluttercompileSdkVersion = '34'
 }
 
-// TODO: 삭제예정
-def printFluttercompileSdkVersion = "fluttercompileSdkVersion: $fluttercompileSdkVersion"
-def printFlutterMinSdkVersion = "flutterMinSdkVersion: $flutterMinSdkVersion"
-
 android {
-    println printFluttercompileSdkVersion
-    println printFlutterMinSdkVersion
-
     namespace "com.joohyupkim.ddocdoc.ddocdoc_clone"
     compileSdk 34 // fluttercompileSdkVersion.toInteger() // flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
