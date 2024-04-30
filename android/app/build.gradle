@@ -24,13 +24,24 @@ if (flutterVersionName == null) {
 
 def flutterMinSdkVersion = localProperties.getProperty('flutter.flutterMinSdkVersion')
 if (flutterMinSdkVersion == null) {   
-    flutterMinSdkVersion = '30'
+    flutterMinSdkVersion = '23'
 }
 
+def fluttercompileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
+if (fluttercompileSdkVersion == null) {   
+    fluttercompileSdkVersion = '34'
+}
+
+// TODO: 삭제예정
+def printFluttercompileSdkVersion = "fluttercompileSdkVersion: $fluttercompileSdkVersion"
+def printFlutterMinSdkVersion = "flutterMinSdkVersion: $flutterMinSdkVersion"
 
 android {
+    println printFluttercompileSdkVersion
+    println printFlutterMinSdkVersion
+
     namespace "com.joohyupkim.ddocdoc.ddocdoc_clone"
-    compileSdk flutter.compileSdkVersion
+    compileSdk fluttercompileSdkVersion.toInteger() // flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
