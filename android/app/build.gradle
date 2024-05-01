@@ -35,7 +35,7 @@ if (fluttercompileSdkVersion == null) {
 android {
     namespace "com.joohyupkim.ddocdoc.ddocdoc_clone"
     compileSdk 34 // fluttercompileSdkVersion.toInteger() // flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion "26.3.11579264" //flutter.ndkVersion //  25.1.8937393 27.0.11718014
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
