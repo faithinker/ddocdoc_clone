@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flash/flash.dart';
-import 'package:flash/flash_helper.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import '../../component/custom_button.dart';
 import '../../utils/preference_item_provider.dart';
+import 'pill_button.dart';
 
 class PharmacyMapScreen extends ConsumerWidget {
   const PharmacyMapScreen({super.key});
@@ -63,39 +61,16 @@ class PharmacyMapScreen extends ConsumerWidget {
                       mapController.getLocationOverlay();
                     },
                   ),
-                  CustomPillButton(),
+                  const Positioned(
+                    bottom: 20.0,
+                    right: 20.0,
+                    child: PillButton(),
+                  ),
                 ],
               ),
             ),
           ],
         )),
-      ),
-    );
-  }
-}
-
-class CustomPillButton extends StatelessWidget {
-  const CustomPillButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        ),
-        child: const Row(
-          mainAxisSize: MainAxisSize.min, // Row 사이즈를 내용물에 맞게 조절
-          children: [
-            Icon(Icons.calendar_today),
-            SizedBox(width: 5), // 아이콘과 텍스트 사이의 간격
-            Text('연중무휴'),
-          ],
-        ),
       ),
     );
   }
