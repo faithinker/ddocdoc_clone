@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'utils/domain_url.dart';
 import 'utils/router_key.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'feature/bottom_tab/tap_screen.dart';
 import 'feature/my_page/event_vote/event_vote_parent_screen.dart';
 import 'feature/web_view/web_view_screen.dart';
@@ -16,7 +17,7 @@ import 'feature/intro/intro_screen.dart';
 import 'feature/permission/permission_screen.dart';
 import 'feature/pharmacy_map/pharmacy_map_screen.dart';
 import 'feature/hospital_map/hospital_map_screen.dart';
-import 'feature/write/write_screen.dart';
+import 'feature/community/write/write_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,9 +83,8 @@ final GoRouter _router = GoRouter(
         builder: (context, state) => const HospitalMapScreen()),
     GoRoute(
         path: RouterKey.write,
-        builder: (context, state) => const WriteScreen(),
-        pageBuilder: (context, state) =>
-            const MaterialPage(child: WriteScreen())),
+        builder: (context, state) => WriteScreen(),
+        pageBuilder: (context, state) => MaterialPage(child: WriteScreen())),
   ],
 );
 
@@ -93,11 +93,14 @@ class DdocdocApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.notoSansTextTheme(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      builder: (context, child) => MaterialApp.router(
+        routerConfig: _router,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          textTheme: GoogleFonts.notoSansTextTheme(),
+        ),
       ),
     );
   }

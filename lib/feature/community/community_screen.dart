@@ -8,6 +8,7 @@ import '../../component/t_header.dart';
 import '../../feature/community/community_tile.dart';
 import '../../utils/router_key.dart';
 import 'community_tab_bar.dart';
+import '../../utils/resources.dart';
 
 /*
 TODO: 공통 탑 헤더 파일 별도 분리 하기? 
@@ -24,10 +25,9 @@ class CommunityScreen extends StatefulWidget {
 
 class _CommunityScreen extends State<CommunityScreen>
     with SingleTickerProviderStateMixin {
-  final _tabList = ["전체", "아이가 아파요", "아토피맘 공감", "성장발달 고민", "육아•일상", "이벤트"];
 
   late TabController tabController = TabController(
-    length: _tabList.length,
+    length: R.communityTabList.length,
     vsync: this,
     initialIndex: 0,
     animationDuration: const Duration(milliseconds: 500),
@@ -47,7 +47,7 @@ class _CommunityScreen extends State<CommunityScreen>
             CommunityTabBar(
               key: const ValueKey('communityTab'),
               tabController: tabController,
-              tabList: _tabList,
+              tabList: R.communityTabList,
             ),
             const SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -58,7 +58,6 @@ class _CommunityScreen extends State<CommunityScreen>
               child: BottomButton(
                 onTap: () {
                   GoRouter.of(context).push(RouterKey.write);
-                  
                 },
               ),
             ),

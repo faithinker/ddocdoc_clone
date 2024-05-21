@@ -50,12 +50,13 @@ final naverMapProvider = Provider<NaverMapNetworkService>((ref) {
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  // FIXME : 에러 수정
-  Future<void> setPrefsData(
-      WidgetRef ref, String value, bool isLocation) async {
-    print('value: $value $isLocation');
-    ref.read(preferenceItemProvider.notifier).setPreferenceItem(
-        isLocation ? PrefernceKey.position : PrefernceKey.dongLocation, value);
+  // 상태 업데이트를 안전한 시점에 수행
+  void setPrefsData(WidgetRef ref, String value, bool isLocation) {
+    Future.microtask(() {
+      ref.read(preferenceItemProvider.notifier).setPreferenceItem(
+          isLocation ? PrefernceKey.position : PrefernceKey.dongLocation,
+          value);
+    });
   }
 
   @override

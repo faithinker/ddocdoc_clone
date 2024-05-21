@@ -1,11 +1,17 @@
+import 'package:ddocdoc_clone/feature/home/component/grey_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../component/custom_button.dart';
+import '../../../component/custom_button.dart';
+import '../../../utils/resources.dart';
 import 'package:flash/flash.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'write_modal_bottom_sheet.dart';
 
 class WriteScreen extends ConsumerWidget {
-  const WriteScreen({super.key});
+  WriteScreen({super.key});
+
+  double screenWidth = ScreenUtil().screenWidth;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,7 +51,23 @@ class WriteScreen extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 5),
-            Divider(color: Colors.black.withOpacity(0.2))
+            Divider(color: Colors.black.withOpacity(0.2)),
+            const SizedBox(height: 25),
+            GreyContainer(
+              imageWidth: screenWidth - 30,
+              height: 55,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  R.howToWriteType,
+                  style: TextStyle(
+                      fontSize: 16, color: Colors.black12.withOpacity(0.3),),
+                ),
+              ),
+              onTap: () {
+                WriteModalBottomSheet.show(context);
+              },
+            ),
           ],
         ),
       ),
