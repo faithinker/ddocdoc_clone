@@ -35,8 +35,7 @@ class MyList extends StatelessWidget {
               fontSize: 11,
             ),
           ),
-          // FIXME: 여기에 빈공간이 왜 생기는지 모르겠다... Expanded, Container(높이 지정) 등으로 감싸봐도 안됌
-          const SizedBox(height: 20), // 이거 없앤다고 공백 줄어들지 않는다.
+          const SizedBox(height: 10), // 이거 없앤다고 공백 줄어들지 않는다.
           
           csCenters.isEmpty
               ? MyManageList(manages: manages)
@@ -94,7 +93,7 @@ class MyManageList extends StatelessWidget {
             ),
             Container(height: 15),
             if (index != manages.length - 1)
-              Divider(indent: 5, color: Colors.black.withOpacity(0.3)),
+              Divider(indent: 5, color: Colors.black.withOpacity(0.2)),
           ],
         );
       },

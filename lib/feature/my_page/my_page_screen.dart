@@ -40,43 +40,37 @@ class MyPageScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return Column(
+    return ListView(
       children: [
-        SafeArea(
-          minimum: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      context.showToast(Text('TODO: 알림 화면 이동'));
-                    },
-                    child: Icon(
-                      Icons.notifications_outlined,
-                      color: Colors.black.withOpacity(0.5),
-                      size: 28,
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  GestureDetector(
-                    onTap: () {
-                      context.showToast(Text('TODO: 설정 화면 이동'));
-                    },
-                    child: Icon(
-                      Icons.settings_outlined,
-                      color: Colors.black.withOpacity(0.5),
-                      size: 28,
-                    ),
-                  ),
-                ],
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GestureDetector(
+              onTap: () {
+                context.showToast(const Text('TODO: 알림 화면 이동'));
+              },
+              child: Icon(
+                Icons.notifications_outlined,
+                color: Colors.black.withOpacity(0.5),
+                size: 28,
               ),
-              const SizedBox(height: 10),
-            ],
-          ),
+            ),
+            const SizedBox(width: 15),
+            GestureDetector(
+              onTap: () {
+                context.showToast(const Text('TODO: 설정 화면 이동'));
+              },
+              child: Icon(
+                Icons.settings_outlined,
+                color: Colors.black.withOpacity(0.5),
+                size: 28,
+              ),
+            ),
+            const SizedBox(width: 20),
+          ],
         ),
+        const SizedBox(height: 10),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
