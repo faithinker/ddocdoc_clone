@@ -1,5 +1,7 @@
 import 'package:ddocdoc_clone/feature/home/component/grey_container.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../component/custom_button.dart';
@@ -8,13 +10,26 @@ import 'package:flash/flash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'write_modal_bottom_sheet.dart';
 
+final typeProvider = StateProvider((ref) => R.howToWriteType);
+
 class WriteScreen extends ConsumerWidget {
   WriteScreen({super.key});
 
-  double screenWidth = ScreenUtil().screenWidth;
+  final double screenWidth = ScreenUtil().screenWidth;
+
+  final titleTextController = TextEditingController();
+  final mainTextController = TextEditingController();
+
+  void dispose() {
+    titleTextController.dispose();
+    mainTextController.dispose();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final String typeText = ref.watch(typeProvider);
+    final selectedRow = ref.watch(selectedRowProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -44,7 +59,8 @@ class WriteScreen extends ConsumerWidget {
                   border:
                       Border.all(color: Colors.grey.withOpacity(0.1), width: 1),
                   onTap: () {
-                    showSimpleFlash(context, 'TODO: 서버에 API Post 쓰기');
+                    showSimpleFlash(context, '서버에 Post Request 요청하기!');
+                    GoRouter.of(context).pop();
                   },
                 ),
                 const SizedBox(width: 20),
@@ -53,20 +69,95 @@ class WriteScreen extends ConsumerWidget {
             const SizedBox(height: 5),
             Divider(color: Colors.black.withOpacity(0.2)),
             const SizedBox(height: 25),
-            GreyContainer(
-              imageWidth: screenWidth - 30,
-              height: 55,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  R.howToWriteType,
-                  style: TextStyle(
-                      fontSize: 16, color: Colors.black12.withOpacity(0.3),),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  GreyContainer(
+                    imageWidth: screenWidth,
+                    height: 55,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            typeText,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black.withOpacity(0.3),
+                            ),
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 15,
+                            color: Colors.black.withOpacity(0.3),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      WriteModalBottomSheet.show(
+                        context,
+                        onTap: (index) {
+                          ref.read(typeProvider.notifier).state =
+                              R.communityTabList[index + 1];
+                          ref.read(selectedRowProvider.notifier).state = index;
+                        },
+                        selectedRow: selectedRow,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: titleTextController,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: R.placeholderTitle,
+                      hintStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.grey),
+                    ),
+                  ),
+                  TextField(
+                    controller: mainTextController,
+                    maxLines: null,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: R.plcaholderMainText,
+                      hintMaxLines: 5,
+                      hintStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: Colors.grey),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+            const Divider(),
+            Container(
+              height: 50,
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+              child: Center(
+                child: GestureDetector(
+                  onTap: () {
+                    print('object onTap @@@@');
+                  },
+                  child: const Row(
+                    children: [
+                      Icon(Icons.image_outlined, size: 29, color: Colors.grey),
+                      SizedBox(width: 5),
+                      Text(
+                        '사진추가 0/10',
+                        style: TextStyle(fontSize: 17, color: Colors.grey),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              onTap: () {
-                WriteModalBottomSheet.show(context);
-              },
             ),
           ],
         ),
@@ -82,7 +173,7 @@ void showSimpleFlash(BuildContext context, String text) {
     builder: (context, controller) {
       return FlashBar(
         controller: controller,
-        title: const Text('Test'),
+        title: const Text('TODO'),
         content: Text(text),
       );
     },
