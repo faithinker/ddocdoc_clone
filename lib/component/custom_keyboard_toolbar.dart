@@ -1,90 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
-class CustomKeyboardToolbarDemo extends StatefulWidget {
-  @override
-  _CustomKeyboardToolbarDemoState createState() => _CustomKeyboardToolbarDemoState();
-}
+final titleFocusNodeProvider = Provider<FocusNode>((ref) => FocusNode());
+final textFocusNodeProvider = Provider<FocusNode>((ref) => FocusNode());
 
-class _CustomKeyboardToolbarDemoState extends State<CustomKeyboardToolbarDemo> {
-  final FocusNode focusNode = FocusNode();
-  OverlayEntry? overlayEntry;
+final keyboardVisibleProvider = StateProvider<bool>((ref) => false);
 
-  @override
-  void initState() {
-    super.initState();
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        showOverlay(context);
-      } else {
-        removeOverlay();
-      }
-    });
-  }
+class CustomKeyboardToolbar extends ConsumerWidget {
+  const CustomKeyboardToolbar({super.key});
 
   @override
-  void dispose() {
-    focusNode.dispose();
-    removeOverlay();
-    super.dispose();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool keyboardVisible = ref.watch(keyboardVisibleProvider);
+    final FocusNode titleFocusNode = ref.watch(titleFocusNodeProvider);
+    final FocusNode textFocusNode = ref.watch(textFocusNodeProvider);
 
-  void showOverlay(BuildContext context) {
-    final overlay = Overlay.of(context);
-    overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-        left: 0,
-        right: 0,
-        child: Material(
-          color: Colors.grey[200],
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_upward),
-                      onPressed: () {
-                        // '위' 버튼 로직
-                      },
+    if (!keyboardVisible) return const SizedBox.shrink();
+
+    return Positioned(
+      bottom: MediaQuery.of(context).viewInsets.bottom,
+      left: 0,
+      right: 0,
+      child: Material(
+        color: Colors.grey[200],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.keyboard_arrow_up),
+                    onPressed: () {
+                      ref.read(titleFocusNodeProvider).requestFocus();
+                    },
+                    isSelected: titleFocusNode.hasFocus,
+                    selectedIcon: const Icon(
+                      Icons.keyboard_arrow_up,
+                      color: Colors.grey,
                     ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_downward),
-                      onPressed: () {
-                        // '아래' 버튼 로직
-                      },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    onPressed: () {
+                      ref.read(textFocusNodeProvider).requestFocus();
+                    },
+                    isSelected: textFocusNode.hasFocus,
+                    selectedIcon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.grey,
                     ),
-                  ],
-                ),
-                ElevatedButton(
-                  child: Text('완료'),
-                  onPressed: () {
-                    // '완료' 버튼 로직
-                    focusNode.unfocus(); // 키보드 닫기
-                  },
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              TextButton(
+                child: const Text('완료'),
+                onPressed: () {
+                  ref.read(titleFocusNodeProvider).unfocus();
+                  ref.read(textFocusNodeProvider).unfocus();
+                },
+              ),
+            ],
           ),
         ),
-      ),
-    );
-    overlay?.insert(overlayEntry!);
-  }
-
-  void removeOverlay() {
-    overlayEntry?.remove();
-    overlayEntry = null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: TextField(
-        focusNode: focusNode,
-        decoration: InputDecoration(hintText: '여기에 입력하세요'),
       ),
     );
   }

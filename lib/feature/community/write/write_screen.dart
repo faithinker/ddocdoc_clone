@@ -1,3 +1,4 @@
+import 'package:ddocdoc_clone/component/custom_keyboard_toolbar.dart';
 import 'package:ddocdoc_clone/feature/home/component/grey_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,25 @@ class WriteScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String typeText = ref.watch(typeProvider);
-    final selectedRow = ref.watch(selectedRowProvider);
+    final int? selectedRow = ref.watch(selectedRowProvider);
+    final FocusNode titleFocusNode = ref.watch(titleFocusNodeProvider);
+    final FocusNode textFocusNode = ref.watch(textFocusNodeProvider);
+
+    titleFocusNode.addListener(() {
+      if (titleFocusNode.hasFocus) {
+        ref.read(keyboardVisibleProvider.notifier).state = true;
+      } else {
+        ref.read(keyboardVisibleProvider.notifier).state = false;
+      }
+    });
+
+    textFocusNode.addListener(() {
+      if (textFocusNode.hasFocus) {
+        ref.read(keyboardVisibleProvider.notifier).state = true;
+      } else {
+        ref.read(keyboardVisibleProvider.notifier).state = false;
+      }
+    });
 
     return Scaffold(
       body: SafeArea(
@@ -111,6 +130,7 @@ class WriteScreen extends ConsumerWidget {
                   const SizedBox(height: 10),
                   TextField(
                     controller: titleTextController,
+                    focusNode: titleFocusNode,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: R.placeholderTitle,
@@ -122,6 +142,7 @@ class WriteScreen extends ConsumerWidget {
                   ),
                   TextField(
                     controller: mainTextController,
+                    focusNode: textFocusNode,
                     maxLines: null,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
@@ -144,7 +165,7 @@ class WriteScreen extends ConsumerWidget {
               child: Center(
                 child: GestureDetector(
                   onTap: () {
-                    print('object onTap @@@@');
+                    print('TODO: 사진 촬영/ 사진에서 선택 Alert 추가');
                   },
                   child: const Row(
                     children: [
@@ -159,6 +180,7 @@ class WriteScreen extends ConsumerWidget {
                 ),
               ),
             ),
+            const CustomKeyboardToolbar(),
           ],
         ),
       ),
