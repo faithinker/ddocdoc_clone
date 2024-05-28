@@ -4,12 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'write_modal_bottom_sheet.dart';
+import '../../../utils/router_key.dart';
 import '../../../component/custom_button.dart';
 import '../../../utils/resources.dart';
-import 'package:flash/flash.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'write_modal_bottom_sheet.dart';
+import '../../../component/custom_alert_dialog.dart';
 
 final typeProvider = StateProvider((ref) => R.howToWriteType);
 
@@ -60,7 +61,13 @@ class WriteScreen extends ConsumerWidget {
                 const SizedBox(width: 20),
                 GestureDetector(
                   onTap: () {
-                    GoRouter.of(context).pop();
+                    showAlertDialog(
+                      context,
+                      popNamed: RouterKey.bottomTab,
+                      titleText: '안내',
+                      descriptionText: R.stopWritingTitle,
+                      buttonTexts: [R.continueWriting, R.exit],
+                    );
                   },
                   child: const Icon(Icons.close),
                 ),
@@ -186,18 +193,4 @@ class WriteScreen extends ConsumerWidget {
       ),
     );
   }
-}
-
-void showSimpleFlash(BuildContext context, String text) {
-  showFlash(
-    context: context,
-    duration: const Duration(seconds: 2),
-    builder: (context, controller) {
-      return FlashBar(
-        controller: controller,
-        title: const Text('TODO'),
-        content: Text(text),
-      );
-    },
-  );
 }
