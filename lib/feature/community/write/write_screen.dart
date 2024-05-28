@@ -73,7 +73,7 @@ class WriteScreen extends ConsumerWidget {
                 ),
                 const Spacer(),
                 const Text(
-                  '게시글 작성',
+                  R.postWrite,
                   style: TextStyle(fontSize: 16),
                 ),
                 const Spacer(),

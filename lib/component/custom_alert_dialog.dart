@@ -51,7 +51,12 @@ void showAlertDialog(
         } else if (index == 1) {
           return ElevatedButton(
             onPressed: () {
-              GoRouter.of(context).pop();
+              if (popNamed != null) {
+                Navigator.of(context)
+                    .popUntil((route) => route.settings.name == popNamed);
+              } else {
+                GoRouter.of(context).pop();
+              }
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
