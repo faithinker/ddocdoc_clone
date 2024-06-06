@@ -43,6 +43,7 @@ class PermissionScreen extends ConsumerWidget {
     ].request();
 
     // 각 권한에 대한 상태 확인 및 처리
+    // FIXME: completion으로 처리
     statuses.forEach((permission, status) {
       if (status.isGranted) {
         print('${permission.toString().split('.')[1]} permission granted');

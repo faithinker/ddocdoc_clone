@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'custom_button.dart';
@@ -10,34 +11,92 @@ import '../../../utils/resources.dart';
 /// 가운데 소제목 Text
 /// 우측 버튼(선택사항) : 완료텍스트 버튼, 도움말 아이콘
 /// 선택사항 : Divider
-class ProfileScreen extends ConsumerWidget {
-  ProfileScreen({super.key});
+
+enum IconType {
+  prev(Icons.arrow_back_ios),
+  close(Icons.close);
+
+  final IconData icon;
+  const IconType(this.icon);
+}
+
+class CustomHeader extends ConsumerWidget {
+  CustomHeader({
+    super.key,
+    this.leftIcon,
+    this.leftOnTap,
+    required this.centerText,
+    this.rightIcon,
+    this.rightWidget,
+    this.rightOnTap,
+    this.needDivider = false,
+  });
+
+  final IconType? leftIcon;
+  final VoidCallback? leftOnTap;
+  final String centerText;
+  final IconType? rightIcon;
+  final Widget? rightWidget;
+  final VoidCallback? rightOnTap;
+  bool needDivider;
 
   final double screenWidth = ScreenUtil().screenWidth;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (needDivider) {
+      return Column(
+        children: [
+          showHeader(),
+          const SizedBox(height: 5),
+          const Divider(),
+        ],
+      );
+    } else {
+      return showHeader();
+    }
+  }
+
+  Widget showHeader() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: const Icon(Icons.close),
+          if (leftIcon != null)
+            GestureDetector(
+              onTap: () {
+                leftOnTap;
+              },
+              child: Icon(leftIcon!.icon),
+            ),
+          const Spacer(),
+          Text(
+            centerText,
+            style: const TextStyle(fontSize: 16),
           ),
           const Spacer(),
-          const Text(
-            R.postWrite,
-            style: TextStyle(fontSize: 16),
-          ),
-          const Spacer(),
+          if (rightIcon != null)
+            GestureDetector(
+              onTap: () {
+                rightOnTap;
+              },
+              child: Icon(rightIcon!.icon),
+            ),
+          if (rightWidget != null)
+            GestureDetector(
+              onTap: () {
+                rightOnTap;
+              },
+              child: rightWidget!,
+            ),
         ],
       ),
     );
   }
 
-  void showCustom() {
+  // TODO: 오른쪽 버튼 disable등 상태감지도 해야하므로 추후에 고려
+  void showCustomButton() {
     CustomButton(
       text: '등록',
       textSize: 15,

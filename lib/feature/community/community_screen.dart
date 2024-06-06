@@ -25,7 +25,6 @@ class CommunityScreen extends StatefulWidget {
 
 class _CommunityScreen extends State<CommunityScreen>
     with SingleTickerProviderStateMixin {
-
   late TabController tabController = TabController(
     length: R.communityTabList.length,
     vsync: this,
@@ -49,9 +48,14 @@ class _CommunityScreen extends State<CommunityScreen>
               tabController: tabController,
               tabList: R.communityTabList,
             ),
-            const SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: CommunityTile(),
+            SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: GestureDetector(
+                onTap: () {
+                  GoRouter.of(context).push(RouterKey.writeDetail('ss'));
+                },
+                child: const CommunityTile(),
+              ),
             ),
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 20),

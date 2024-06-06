@@ -4,10 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/resources.dart';
 import '../../../component/custom_alert_dialog.dart';
 
+
 // TODO: 내 프로필, 타 프로필 한번에 처리
 
 class ProfileScreen extends ConsumerWidget {
-  ProfileScreen({super.key});
+  ProfileScreen({super.key, required this.id});
+
+  final String id;
 
   final double screenWidth = ScreenUtil().screenWidth;
 

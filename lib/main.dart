@@ -18,6 +18,9 @@ import 'feature/permission/permission_screen.dart';
 import 'feature/pharmacy_map/pharmacy_map_screen.dart';
 import 'feature/hospital_map/hospital_map_screen.dart';
 import 'feature/community/write/write_screen.dart';
+import 'feature/community/write_detail/write_detail_screen.dart';
+import 'feature/community/profile/profile_screen.dart';
+import 'feature/community/write_detail/write_detail_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +52,7 @@ final GoRouter _router = GoRouter(
     //     path: RouterKey.eventVote,
     //     builder: (context, state) => const EventVoteParentScreen()),
     GoRoute(
-        path: '/webview/:url',
+        path: RouterKey.webUrlPath,
         builder: (context, state) {
           final url = state.pathParameters['url']!;
           return WebViewScreen(
@@ -85,6 +88,23 @@ final GoRouter _router = GoRouter(
         path: RouterKey.write,
         builder: (context, state) => WriteScreen(),
         pageBuilder: (context, state) => MaterialPage(child: WriteScreen())),
+    GoRoute(
+        path: RouterKey.writeDetailPath,
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          print('jhkim $id');
+          return WriteDetailScreen(
+            id: id,
+          );
+        }),
+    GoRoute(
+        path: RouterKey.profilePath,
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return ProfileScreen(
+            id: id,
+          );
+        }),
   ],
 );
 

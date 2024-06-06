@@ -1,6 +1,8 @@
 class R {
   static const name = '';
 
+
+  // MARK: 커뮤니티
   static const communityTabList = [
     "전체",
     '아이가 아파요',
@@ -29,6 +31,8 @@ class R {
   static const stopWritingTitle = '게시글 작성을 그만하시겠습니다?\n작성 중인 게시글은 저장되지 않습니다.';
   static const continueWriting = '계속 게시글 작성';
   static const exit = '나가기';
+  static const postDetail = '게시글 상세';
+  // static const 
 
   // MARK: 홈 2Depth
   static const familyManage = '가족 관리';
