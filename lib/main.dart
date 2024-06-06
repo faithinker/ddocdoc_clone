@@ -92,7 +92,6 @@ final GoRouter _router = GoRouter(
         path: RouterKey.writeDetailPath,
         builder: (context, state) {
           final id = state.pathParameters['id']!;
-          print('jhkim $id');
           return WriteDetailScreen(
             id: id,
           );

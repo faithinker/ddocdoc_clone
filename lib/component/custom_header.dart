@@ -30,6 +30,7 @@ class CustomHeader extends ConsumerWidget {
     this.rightWidget,
     this.rightOnTap,
     this.needDivider = false,
+    this.needPadding = false,
   });
 
   final IconType? leftIcon;
@@ -38,28 +39,25 @@ class CustomHeader extends ConsumerWidget {
   final IconType? rightIcon;
   final Widget? rightWidget;
   final VoidCallback? rightOnTap;
-  bool needDivider;
+  final bool needDivider;
+  final bool needPadding;
 
   final double screenWidth = ScreenUtil().screenWidth;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (needDivider) {
-      return Column(
-        children: [
-          showHeader(),
-          const SizedBox(height: 5),
-          const Divider(),
-        ],
-      );
-    } else {
-      return showHeader();
-    }
+    return Column(
+      children: [
+        showHeader(),
+        const SizedBox(height: 5),
+        if (needDivider) const Divider(),
+      ],
+    );
   }
 
   Widget showHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: needPadding ? 20 : 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -70,6 +68,7 @@ class CustomHeader extends ConsumerWidget {
               },
               child: Icon(leftIcon!.icon),
             ),
+          if (leftIcon == null) const SizedBox(width: 15),
           const Spacer(),
           Text(
             centerText,
@@ -90,6 +89,8 @@ class CustomHeader extends ConsumerWidget {
               },
               child: rightWidget!,
             ),
+          if (rightIcon == null && rightWidget == null)
+            const SizedBox(width: 15)
         ],
       ),
     );
