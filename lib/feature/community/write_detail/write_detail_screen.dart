@@ -20,87 +20,108 @@ class WriteDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              CustomHeader(leftIcon: IconType.prev, centerText: R.postDetail),
-              Expanded(
-                child: ListView(
-                  children: [
-                    const SizedBox(height: 10),
-                    Row(
+        child: Column(
+          children: [
+            CustomHeader(
+                leftIcon: IconType.prev,
+                centerText: R.postDetail,
+                needPadding: true),
+            Expanded(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Colors.black,
-                        ),
-                        const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        const SizedBox(height: 10),
+                        Row(
                           children: [
-                            const Text(
-                              '댕이맘',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            const CircleAvatar(
+                              radius: 18,
+                              backgroundColor: Colors.black,
                             ),
-                            Text(
-                              '2시간 전',
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.3)),
+                            const SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  '댕이맘',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '2시간 전',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.3)),
+                                ),
+                              ],
                             ),
+                            const Spacer(),
+                            const Icon(Icons.more_vert),
+                            const SizedBox(width: 5),
                           ],
                         ),
-                        const Spacer(),
-                        const Icon(Icons.more_vert),
-                        const SizedBox(width: 5),
+                        const SizedBox(height: 15),
+                        const Text(
+                          '가나다라마바사 아자차카 타파하 이것은 한글 테스트입니다. 라라와와아',
+                          style: TextStyle(
+                              fontSize: 23, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 5),
+                        const Text(
+                          '본문 테스트 글자입니다. \n\n\n\n여러줄 테스트\n\n마지막줄입니다.',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 20),
+                        Divider(
+                          color: Colors.black.withOpacity(0.1),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconTextWidget(
+                                icon: Icons.favorite_outline,
+                                text: '좋아요',
+                                onTap: () {
+                                  print('Favorite');
+                                }),
+                            const SizedBox(width: 15),
+                            IconTextWidget(
+                                icon: Icons.sms_outlined,
+                                text: '댓글 4',
+                                onTap: () {
+                                  print('comment');
+                                }),
+                            const SizedBox(width: 15),
+                            IconTextWidget(
+                                icon: Icons.ios_share_outlined,
+                                text: '공유하기',
+                                onTap: () {
+                                  print('share');
+                                }),
+                          ],
+                        )
                       ],
                     ),
-                    const SizedBox(height: 15),
-                    const Text(
-                      '가나다라마바사 아자차카 타파하 이것은 한글 테스트입니다. 라라와와아',
-                      style:
-                          TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 5),
-                    const Text(
-                      '본문 테스트 글자입니다. \n\n\n\n여러줄 테스트\n\n 마지막줄입니다.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 20),
-                    Divider(
-                      color: Colors.black.withOpacity(0.1),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconTextWidget(
-                            icon: Icons.favorite_outline,
-                            text: '좋아요',
-                            onTap: () {
-                              print('Favorite');
-                            }),
-                        const SizedBox(width: 15),
-                        IconTextWidget(
-                            icon: Icons.sms_outlined,
-                            text: '댓글 4',
-                            onTap: () {
-                              print('comment');
-                            }),
-                        const SizedBox(width: 15),
-                        IconTextWidget(
-                            icon: Icons.ios_share_outlined,
-                            text: '공유하기',
-                            onTap: () {
-                              print('share');
-                            }),
-                      ],
-                    )
-                  ],
-                ),
+                  ),
+                  Divider(thickness: 10, color: Colors.black.withOpacity(0.1)),
+                  const Column(
+                    children: [
+                      SizedBox(height: 50),
+                      Icon(Icons.sms_rounded, size: 75),
+                      SizedBox(height: 35),
+                      Text('아직 댓글이 없어요.\n따뜻한 첫 댓글을 남겨보세요.'),
+                      SizedBox(height: 50),
+                    ],
+                  ),
+                  Divider(thickness: 10, color: Colors.black.withOpacity(0.1)),
+                  const SizedBox(height: 30),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
