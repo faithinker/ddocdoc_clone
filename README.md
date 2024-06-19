@@ -15,7 +15,7 @@ Ddocdoc Clone Project
   
 # 프로젝트 스크린샷
   
-[0_1_Intro_권한](https://github.com/faithinker/ddocdoc_clone/assets/39996770/9c564e92-ee76-43ce-8de9-5e4fab7930a5) | [0_2_로그인전](https://github.com/faithinker/ddocdoc_clone/assets/39996770/c630742a-162a-4c5c-9ef1-133eaccf91f1)
+![0_1_Intro_권한](https://github.com/faithinker/ddocdoc_clone/assets/39996770/9c564e92-ee76-43ce-8de9-5e4fab7930a5) | https://github.com/faithinker/ddocdoc_clone/assets/39996770/c630742a-162a-4c5c-9ef1-133eaccf91f1
 ---|---|
 Intro 권한 화면|로그인 Action Sheet
   
